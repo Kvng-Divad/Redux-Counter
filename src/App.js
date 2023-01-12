@@ -1,28 +1,30 @@
 //import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './App.css';
+import { actions } from "./redux/store"
 
 function App() {
   const counter = useSelector((state)=> state.counter)
   const dispatch = useDispatch();
   //const {values, setValues} = useState()
-  const reset =()=>{
-    dispatch({ type: 'reset'})
-  }
-  const increment =()=>{
-    dispatch({ type: 'add'})
-  }
-
-  const decrement =()=>{
-    dispatch({ type: 'sub'})
-  }
-
-  const addBy =()=>{
-    dispatch({ type: 'addBy', payload: 10 })
-  }
   /*const handleChange = () => {
     setValues(values)
   }*/
+
+  const reset =()=>{
+    dispatch(actions.reset())
+  }
+  const increment =()=>{
+    dispatch(actions.increment())
+  }
+
+  const decrement =()=>{
+    dispatch(actions.decrement())
+  }
+
+  const addBy =()=>{
+    dispatch(actions.addBy(10))
+  }
   return (
     <div className="counter">
 

@@ -1,27 +1,32 @@
-import { legacy_createStore as createStore} from 'redux'
+import {configureStore , createSlice} from "@reduxjs/toolkit"
 
-const reducerFn = (state = {counter: 0}, action) => {
+const counterSlice = createSlice({
 
-
-    if(action.type === "reset"){
-        return{counter: state.counter = 0}
+    name: "counter",
+    initialState:{counter: 0},
+    reducers: {
+        reset(state, action){
+            state.counter = 0;
+        },
+        increment(state, action){
+            state.counter ++;
+        },
+        decrement(state, action){
+            state.counter--;
+        },
+        addBy(state, action){
+            state.counter += action.payload;
+        }
     }
-    if(action.type === "add"){
-        return{counter: state.counter + 1}
-    }
-    if(action.type === "sub"){
-        return{counter: state.counter - 1}
-    }
-    if(action.type === "addBy"){
-        return{counter: state.counter + action.payload}
-    }
-    
-    return state
-};
+   
+});
+
+export const actions = counterSlice.actions
+
+const store = configureStore({
+    reducer:counterSlice.reducer
+})
 
 
-const store = createStore(reducerFn)
+export default store;
 
-
-
-export default store
